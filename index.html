@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vamo Tomar Uma?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-color: red;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 60px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 20px;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .move {
+            animation: moveButton 2s infinite;
+        }
+
+        @keyframes moveButton {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-30px) translateX(30px);
+            }
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+
+            button {
+                margin: 5px;
+                padding: 5px;
+                font-size: 16px;
+            }
+
+            .button-container {
+                bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Vamo Tomar Uma?</h1>
+    <div class="button-container">
+        <button onclick="aumentarContador()">Sim</button>
+        <button onclick="moverBotaoNao()" id="button-nao">Não</button>
+    </div>
+
+    <script>
+        function aumentarContador() {
+            let contador = localStorage.getItem('contador');
+            contador = contador ? parseInt(contador) + 1 : 1;
+            localStorage.setItem('contador', contador.toString());
+
+            window.location.href = "https://www.youtube.com/watch?v=NkrvcIfU67c";
+        }
+
+        function moverBotaoNao() {
+            var buttonNao = document.getElementById('button-nao');
+            buttonNao.classList.add('move');
+            var screenWidth = window.innerWidth - buttonNao.offsetWidth;
+            var screenHeight = window.innerHeight - buttonNao.offsetHeight - 20; // 20 is the bottom margin of the button container
+            var randomX = Math.floor(Math.random() * screenWidth);
+            var randomY = Math.floor(Math.random() * screenHeight);
+            randomX = Math.max(randomX, buttonNao.offsetWidth / 2);
+            randomY = Math.max(randomY, buttonNao.offsetHeight / 2);
+            randomX = Math.min(randomX, screenWidth - buttonNao.offsetWidth / 2);
+            randomY = Math.min(randomY, screenHeight - buttonNao.offsetHeight / 2);
+            buttonNao.style.top = randomY + "px";
+            buttonNao.style.left = randomX + "px";
+
+            setTimeout(function() {
+                buttonNao.classList.remove('move');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
