@@ -59,42 +59,107 @@
                 margin: 0 5px;
             }
         }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        .popup.active {
+            display: block;
+        }
+
+        .popup h2 {
+            font-size: 24px;
+            color: #f9a825;
+            margin-bottom: 10px;
+        }
+
+        .popup p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .popup button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #f9a825;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .hide {
+            display: none;
+        }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var popup = document.getElementById('musicPopup');
+            popup.classList.add('active');
+        });
+    </script>
+    <link rel="preload" as="audio" href="music/Tentei _Te_Esquecer .mp3">
 </head>
+    
 <body>
+
     <div class="container">
         <h1>Vamo Tomar Uma?</h1>
         <div class="button-container">
-            <button class="button" onclick="aumentarContador()">Sim</button>
-            <button class="button" onclick="moverBotaoNao()" id="button-nao">Não</button>
+            <button class="button" onclick="redirecionarWhatsApp()">Sim</button>
+            <button class="button" onclick="mostrarPopup(this)">Não</button>
         </div>
     </div>
 
+    <audio id="audio" src="music/Tentei _Te_Esquecer .mp3" loop></audio>
+
+    <div id="musicPopup" class="popup">
+        <h2>Ta afim de ouvir um som?</h2>
+        <button onclick="iniciarMusica()">Sim</button>
+        <button onclick="fecharPopupmusic()">Não</button>
+    </div>
+
+    <div id="noPopup" class="popup hide">
+        <h2>Opção Não Disponível</h2>
+        <p>A opção "Não" não está disponível no momento.</p>
+        <button onclick="fecharPopup()">Fechar</button>
+    </div>
+
     <script>
-        function aumentarContador() {
-            let contador = localStorage.getItem('contador');
-            contador = contador ? parseInt(contador) + 1 : 1;
-            localStorage.setItem('contador', contador.toString());
-            window.location.href = "https://www.youtube.com/watch?v=NkrvcIfU67c";
+        function redirecionarWhatsApp() {
+            window.open("https://api.whatsapp.com/send?phone=+5593991885821&text=Só%20se%20for%20agora,%20meu%20patrão", target="_blank");
         }
 
-        function moverBotaoNao() {
-            var buttonNao = document.getElementById('button-nao');
-            buttonNao.classList.add('move');
-            var screenWidth = window.innerWidth - buttonNao.offsetWidth;
-            var screenHeight = window.innerHeight - buttonNao.offsetHeight - 20; // 20 is the bottom margin of the button container
-            var randomX = Math.floor(Math.random() * screenWidth);
-            var randomY = Math.floor(Math.random() * screenHeight);
-            randomX = Math.max(randomX, buttonNao.offsetWidth / 2);
-            randomY = Math.max(randomY, buttonNao.offsetHeight / 2);
-            randomX = Math.min(randomX, screenWidth - buttonNao.offsetWidth / 2);
-            randomY = Math.min(randomY, screenHeight - buttonNao.offsetHeight / 2);
-            buttonNao.style.top = randomY + "px";
-            buttonNao.style.left = randomX + "px";
+        function mostrarPopup(button) {
+            var noPopup = document.getElementById('noPopup');
+           noPopup.classList.add('active');
+           button.classList.add('hide');
+        }
 
-            setTimeout(function() {
-                buttonNao.classList.remove('move');
-            }, 2000);
+        function iniciarMusica() {
+            var musicPopup = document.getElementById('musicPopup');
+            musicPopup.classList.remove('active');
+            var audio = document.getElementById('audio');
+            audio.play();
+        }
+
+        function fecharPopup() {
+            var noPopup = document.getElementById('noPopup');
+            noPopup.classList.remove('active');
+        }
+        function fecharPopupmusic() {
+            var musicPopup = document.getElementById('musicPopup');
+           musicPopup.style.display = 'none';
         }
     </script>
 </body>
