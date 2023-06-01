@@ -1,4 +1,4 @@
-# teste.github.io
+# vamo_tomar_uma.github.io
 # Vamo Tomar Uma?
 
 Bem-vindo(a) ao Vamo Tomar Uma, um site  descontraído e divertido! 
