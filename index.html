@@ -3,116 +3,11 @@
 <head>
     <title>Vamo Tomar Uma garai?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            background-color: #f9a825;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 48px;
-            color: #fff;
-            margin-bottom: 40px;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .button {
-            padding: 12px 24px;
-            font-size: 24px;
-            background-color: #fff;
-            color: #f9a825;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            margin: 0 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .button:hover {
-            background-color: #e0e0e0;
-        }
-
-        @media screen and (max-width: 600px) {
-            h1 {
-                font-size: 36px;
-                margin-bottom: 20px;
-            }
-
-            .button {
-                padding: 10px 20px;
-                font-size: 20px;
-                margin: 0 5px;
-            }
-        }
-
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            display: none;
-        }
-
-        .popup.active {
-            display: block;
-        }
-
-        .popup h2 {
-            font-size: 24px;
-            color: #f9a825;
-            margin-bottom: 10px;
-        }
-
-        .popup p {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .popup button {
-            padding: 8px 16px;
-            font-size: 16px;
-            background-color: #f9a825;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .hide {
-            display: none;
-        }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var popup = document.getElementById('musicPopup');
-            popup.classList.add('active');
-        });
-    </script>
+    <link rel="stylesheet" type="text/css" href="src/style.css">
+    <script src="src/script.js"></script>
     <link rel="preload" as="audio" href="music/Tentei _Te_Esquecer .mp3">
 </head>
-    
 <body>
-
     <div class="container">
         <h1>Vamo Tomar Uma?</h1>
         <div class="button-container">
@@ -130,37 +25,9 @@
     </div>
 
     <div id="noPopup" class="popup hide">
-        <h2>Não vou aceitar não como resposta! </h2>
-        <p>Vamo logo pow!.</p>
+        <h2>Não vou aceitar não como resposta!!</h2>
+        <p>Vamo logo pow!!!</p>
         <button onclick="fecharPopup()">Fechar</button>
     </div>
-
-    <script>
-        function redirecionarWhatsApp() {
-            window.open("https://api.whatsapp.com/send?phone=+5593991885821&text=Só%20se%20for%20agora,%20meu%20patrão", target="_blank");
-        }
-
-        function mostrarPopup(button) {
-            var noPopup = document.getElementById('noPopup');
-           noPopup.classList.add('active');
-           button.classList.add('hide');
-        }
-
-        function iniciarMusica() {
-            var musicPopup = document.getElementById('musicPopup');
-            musicPopup.classList.remove('active');
-            var audio = document.getElementById('audio');
-            audio.play();
-        }
-
-        function fecharPopup() {
-            var noPopup = document.getElementById('noPopup');
-            noPopup.classList.remove('active');
-        }
-        function fecharPopupmusic() {
-            var musicPopup = document.getElementById('musicPopup');
-           musicPopup.style.display = 'none';
-        }
-    </script>
 </body>
 </html>
